@@ -1,5 +1,5 @@
 .data
-P: .word 8	# 8	201	1005
+P: .word 1005	# 8	201	1005
 R: .word -1
 
 .text
@@ -14,32 +14,32 @@ R: .word -1
 		addi $s1, $0, 6
 		j done
 		
-notZero:	addi $t0, $0, 0x10000000		
+notZero:	addi $t0, $0, 0x00000001		
 		bne $t0, $s0, notOne		#	X(P) is defined as X = (P mod 16), Y(P) is defined as Y = ((6 ^ P) mod 17 )
 		addi $s0, $0, 2
 		j done
 						#	(Shift left 28 then shift right 28 perfectly produces a result X(P) bounded between 0 and 15.)				
-notOne:		addi $t0, $0, 0x20000000				
+notOne:		addi $t0, $0, 0x00000002				
 		bne $t0, $s0, notTwo		#	My algorithm gives these (X, Y) pairs:
 		addi $s1, $0, 12		#		(0, 6) (1, 2) (2, 12) (3, 4) (4, 7) (5, 8)
 		j done				#	(X,Y):	(6, 14) (7, 16) (8, 11) (9, 15) (10, 5)
 						#		(11, 13) (12, 10) (13, 9) (14, 3) (15, 1)
-notTwo:		addi $t0, $0, 0x30000000
+notTwo:		addi $t0, $0, 0x00000003
 		bne $t0, $s0, notThree
 		addi $s1, $0, 4
 		j done
 						#	Code is set up such that when P is inputted into $s0, it is converted into X and from X into Y.
-notThree:	addi $t0, $0, 0x40000000	#	With Y being the value to store into memory
+notThree:	addi $t0, $0, 0x00000004	#	With Y being the value to store into memory
 		bne $t0, $s0, notFour		#	This method avoids all loops and has been designed to minimize redundant computation
 		addi $s1, $0, 7
 		j done
 						#	Example code block explained: (all code blocks work this way, just with different values)
-notFour:	addi $t0, $0, 0x50000000	#	Start by setting $t0 to the next value that is checked
+notFour:	addi $t0, $0, 0x00000005	#	Start by setting $t0 to the next value that is checked
 		bne $t0, $s0, notFive		#	Check if $t0 = $s0, if so we're done testing values and can move on
 		addi $s1, $0, 8			#	Set $s1 to the Y value corresponding to the X value that was found
 		j done				#	Jumps to done (Which stores the new s1 value to memory)
 		
-notFive:	addi $t0, $0, 0x60000000
+notFive:	addi $t0, $0, 0x00000006
 		bne $t0, $s0, notSix
 		addi $s1, $0, 14
 		j done
