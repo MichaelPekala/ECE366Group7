@@ -1,5 +1,4 @@
 # ECE366Group7
-
 ISA Functions:
 
 lw        00010 x y		Either loads into $1 or $2 from the address at $0 or $1
