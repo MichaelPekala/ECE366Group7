@@ -4,7 +4,9 @@ R: .word -1			# address where the result of the operation will be stored
 
 .text
 	
-	    	lw $2, 0x2000($0)
+	    	lw $2, $0
+		init $3, 1
+		sub $2, $3
 	    	init $3, 1
 pwr:		init $1, 0
 		init $4, 0
@@ -21,9 +23,10 @@ mod:  		init $1, 1
 		j mod
 sMod:		init $1, 1
 	    	sub $2, $1		# subtracts 1 from the power counter
-	    	bltR1 $2, pwr
-		
-		init $2, 0
+		init $1, 0
+	    	bgtR1 $2, end		# branch to power if $2 is greater than 0
+		j pwr
+end:		init $2, 0
 		add $2, $3 
 	
 	    	sw $2, 2
