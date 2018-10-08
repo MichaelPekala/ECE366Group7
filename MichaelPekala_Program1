@@ -4,21 +4,19 @@ R: .word -1			# address where the result of the operation will be stored
 
 .text
 	
-	    lw $8, 0x2000($0)
-	    addi $9, $0, 1
+	    	lw $8, 0x2000($0)
+	    	addi $9, $0, 1
 
-pwr:	addi $10, $0, 0
-mtpy:	sll $11, $9, 2		# adds 6 and stores it into $12
-	    sll $12, $9, 1 		# subtracts 1 from multiplier counter
-	    add $10, $11, $12	# if 0 < $9, $13 = 1
+pwr:		addi $10, $0, 0
+mtpy:		sll $11, $9, 2		# adds 6 and stores it into $12
+	    	sll $12, $9, 1 		# subtracts 1 from multiplier counter
+	    	add $10, $11, $12	# if 0 < $9, $13 = 1
 	
-mod:  addi $9, $10, 0		# stores value of mod into $9
-	    subi $10, $10, 17	# subtracts 17 from $10
-	    slt $13, $0, $10	# if 0 < $12, $13 = 1
-	    bne $13, $0, mod	# branches back to mod until the multiplation is negative
+mod:  		addi $9, $10, 0		# stores value of mod into $9
+		subi $10, $10, 17	# subtracts 17 from $10
+	    	bgz $10, mod
 	
-	    subi $8, $8, 1		# subtracts 1 from the power counter
-	    slt $13, $0, $8		# if 0 < $8, $13 = 1
-	    bne $0, $13, pwr 	# branches back to pwr until the entire modulation is complete
+	    	subi $8, $8, 1		# subtracts 1 from the power counter
+	    	bgz $13, pwr
 	
-	    sw $9, 0x2004($0)
+	    	sw $9, 0x2004($0)
