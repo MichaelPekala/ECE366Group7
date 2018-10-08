@@ -30,14 +30,14 @@
 			sw $1 0x2($0)			(0)001 0001
 			end				(0)000 0000
 				
-	notZero		init $1, 1			(1)010 0000		(1 is set to 1)
+	notZero		init $1, 1			(1)010 0000		($1 is set to 1)
 			bneR1 $2 notOne			(0)000 1111		(Branches to notOne if $1 is not equal to 1)
 			init $1, 6			(1)010 0101		(If $1 is equal to 1, sets $1 equal to 6)	
 			sw $1 0x2($0)			(0)001 0001		(And then stores that into memory at 0x2)
-			end				(0)000 0000		(And ends the program)
+			end				(0)000 0000		(Ends the program)
 				
-	notOne		init $1, 2			(0)010 0001
-			bneR1 $2 notTwo			(0)000 1111		(All code blocks work this way, so they are not all commented.)
+	notOne		init $1, 2			(0)010 0001		(All code blocks work this way, so they are not all commented)
+			bneR1 $2 notTwo			(0)000 1111		
 			init $1, 2			(0)010 0001	
 			sw $1 0x2($0)			(0)001 0001
 			end				(0)000 0000
