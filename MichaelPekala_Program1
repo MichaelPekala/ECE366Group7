@@ -13,7 +13,7 @@ mtpy:		sll $9, $9, 1
 		add $9, $11, $9
 	
 mod:  		lw $7, 0x2001($1)
-		addi $9, $10, 0		# stores value of mod into $9
+		add $9, $10, $0		# stores value of mod into $9
 		sub $10, $10, $7	# subtracts $7 from $10
 	    	bgz $10, mod
 	
