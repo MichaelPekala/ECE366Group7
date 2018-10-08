@@ -8,9 +8,9 @@ R: .word -1			# address where the result of the operation will be stored
 	    	addi $9, $0, 1
 
 pwr:		addi $10, $0, 0
-mtpy:		sll $7, $9, 2		# adds 6 and stores it into $12
-	    	sll $12, $9, 1 		# subtracts 1 from multiplier counter
-	    	add $10, $7, $12	# if 0 < $9, $13 = 1
+mtpy:		sll $9, $9, 1
+		sll $11, $9, 1
+		add $9, $11, $9
 	
 mod:  		lw $7, 0x2001($1)
 		addi $9, $10, 0		# stores value of mod into $9
@@ -18,6 +18,6 @@ mod:  		lw $7, 0x2001($1)
 	    	bgz $10, mod
 	
 	    	subi $8, $8, 1		# subtracts 1 from the power counter
-	    	bgz $13, pwr
+	    	bgz $8, pwr
 	
 	    	sw $9, 0x2004($0)
