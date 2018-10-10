@@ -1,8 +1,9 @@
 # Program uses algorithm:		
-#	 
-# |	for (int p; p > 0; p--) {
-# |		R = R * 6 % q
-# |	 }
+# _______________________________________	 
+# |	for (int p; p > 0; p--) {	|
+# |		R = R * 6 % q		|
+# |	 }				|
+# |_____________________________________|
 #
 # R is equal to the final value of the function.
 # Assume that p is in M[0] and q is in M[1].
