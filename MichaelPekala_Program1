@@ -1,32 +1,43 @@
-.data
-P: .word 1600			# the power used for the number 6 
-R: .word -1			# address where the result of the operation will be stored
+# Program uses algorithm:		
+#	 
+# |	for (int p; p > 0; p--) {
+# |		R = R * 6 % q
+# |	 }
+#
+# R is equal to the final value of the function.
+# Assume that p is in M[0] and q is in M[1].
 
-.text
+
+
+		Instructions:			Machine Code:
+
+	    	init $4, 0			(0)011 1100
+		lw $2, $4			(1)000 0111
+		init $3, 1			(0)011 1001
+		sub $2, $3			(1)010 0011
+	    	init $3, 1			(0)011 1001
+pwr:		init $1, 0			(0)011 0000
+		init $4, 0			(0)011 1100
+		shiftL $3			(1)010 1010
+		add $1, $3			(0)100 0001
+		shiftL $1			(0)010 1000
+		add $3, $1			(0)100 0100
 	
-	    	lw $2, $0
-		init $3, 1
-		sub $2, $3
-	    	init $3, 1
-pwr:		init $1, 0
-		init $4, 0
-mtpy:		shiftl $3
-		add $1, $3
-		shiftl $1
-		add $3, $1
+mod:  		init $1, 1			(1)011 0001
+		lw $1, $1			(1)000 0100
+		sub $3, $1			(0)010 0100
+		init $1, 0			(0)011 0000
+	    	bltR1 $3, sMod			(1)100 1100  		
+		j mod				(1)110 1011
+
+sMod:		init $1, 1			(1)011 0001
+	    	sub $2, $1			(0)010 0010
+		init $1, 0			(0)011 0000
+	    	bgtR1 $2, end			(1)000 1000
+		j pwr				(0)110 0101
+
+end:		init $2, 0			(1)011 0100
+		add $2, $3 			(1)100 0011
 	
-mod:  		init $1, 1
-		lw $1, $1
-		sub $3, $1		# subtracts $7 from $10
-		init $1, 0
-	    	bltR1 $3, sMod
-		j mod
-sMod:		init $1, 1
-	    	sub $2, $1		# subtracts 1 from the power counter
-		init $1, 0
-	    	bgtR1 $2, end		# branch to power if $2 is greater than 0
-		j pwr
-end:		init $2, 0
-		add $2, $3 
-	
-	    	sw $2, 2
+	    	sw $2, 2			(0)011 1010
+		end				(0)000 0000
