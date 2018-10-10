@@ -1,0 +1,15 @@
+
+      lw $2, $0
+      init $1, 1
+      
+pwr:  init $3, 0
+      sll $4, 2
+      sll $1, 1
+      add $3, $4
+      init $1, 1
+      
+mod:  add $3, $0
+      lw $4, $1
+      sub 
+      
+

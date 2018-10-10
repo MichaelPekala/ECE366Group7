@@ -1,7 +1,6 @@
 	# ECE366Group7
 	ISA Functions:
 
-<<<<<<< HEAD
 	lw			00001 x y		Either loads into $1 or $2 from the address at $1 or $3
 	sw        	001 x iii  		Stores $1 or $2 into memory at M[0:7]
 	init  	    011 xx ii		Initializes $1 or $3 to be an unsigned imm [0:3]		reg [1:4]
@@ -13,20 +12,6 @@
 	add			1000 xx y		$xx = $xx + $y		x:[1:4] y:[1 or 3]
 	j		  	11  iiiii		jumps to PC = imm[0:31]
 	addi		101	xx	ii		$xx = $xx + ii x:[1:4] imm [-2,1]
-=======
-	lw	      00001 x y			Loads from memory to $1 or $4
-	sw        	001 x iii  		Stores $1 or $2 into memory at M[0:7]
-	init  	        011 xx ii		Initializes $xx to be an unsigned imm [0:3]	
-	shiftL	      01010 xx			$xx << 1
-	shiftR	      01011 xx			$xx >> 1
-	bgtR1	       0001 x ii    		Branches if $2 or $4 is greater than $1 by unsigned imm [1:4]
-	bltR1	       1001 x ii		Branches if $2 or $4 is less than $1 by unsigned imm [1:4]
-	sub	       0100 xx y 		$xx = $xx - $y		x:[1:4] y:[1 or 3]
-	add	       1000 xx y		$xx = $xx + $y		x:[1:4] y:[1 or 3]
-	j		 11 iiiii		jumps to PC = imm[0:31]
-	increment    000001 x 			Increments either $3 or $4 by 1
-	decrement   0000000			Increments $4 by -1
->>>>>>> 531ea45440729f5442d267af8c369705942b8951
 
 	Psudo code for project 1:
 
