@@ -8,9 +8,9 @@
 	shiftR	      01011 xx			$xx >> 1
 	bgtR1	       0001 x ii    		Branches if $2 or $4 is greater than $1 by unsigned imm [1:4]
 	bltR1	       1001 x ii		Branches if $2 or $4 is less than $1 by unsigned imm [1:4]
-	sub	       0100 xx y 		$xx = $xx - $yy		x:[1:4] y:[1 or 3]
+	sub	       0100 xx y 		$xx = $xx - $y		x:[1:4] y:[1 or 3]
 	add	       1000 xx y		$xx = $xx + $y		x:[1:4] y:[1 or 3]
-	j		 11  iiiii		jumps to PC = imm[0:31]
+	j		 11 iiiii		jumps to PC = imm[0:31]
 	increment    000001 x 			Increments either $3 or $4 by 1
 	decrement   0000000			Increments $4 by -1
 
