@@ -1,7 +1,7 @@
 	# ECE366Group7
 	ISA Functions:
 
-	lw	       00001 x  y		Either loads into $1 or $2 from the address at $1 or $3
+	lw	       00001 x  y		Loads into $1 or $2 from the address at $1 or $3
 	sw        	 001 x  iii  		Stores $1 or $2 into memory at M[0:7]
 	init  	         011 xx ii		Initializes $1 or $3 to be an unsigned imm [0:3]		reg [1:4]
 	shiftL	       01010 xx			$xx << 1
