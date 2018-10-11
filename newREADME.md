@@ -12,3 +12,4 @@
 	add		1000 xx y		$x = $x + $yy		x:[1:2] y:[1:4]
 	j		  11 iiiii		Jumps to PC = imm[0:31]
 	addi		 101 xx ii		$xx = $xx + ii x:[1:4] imm [-2,1]
+	halt 	     0000000			Ends the program
