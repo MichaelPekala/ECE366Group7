@@ -1,9 +1,3 @@
-# Authors: Trung Le, Wenjing Rao
-# MIPS instruction encoding format:
-# R-type: 6(op) + 5(rs) + 5(rt) + 5(rd) + 5(shamt) + 6(funct)
-# I-type: 6(op) + 5(rs) + 5(rt) + 16(imm)
-#-----------------------------------------------------------
-
 print("ECE366 Fall 2018 mini ISA assembler, supporting: lw, sw, init, shiftL, shiftR, bgtR1, bltR1, sub, add, j, increment, decrement")
 print("--------")
 
@@ -63,6 +57,7 @@ for line in input_file:
             rt = format(1, "01b")  #rt = $2
         else:
             print("Error at lw: register destination")
+            output_file.write("Error lw Reg dest \n")
             continue;
 
         if(line[1] == '1'):           #rs = $1
@@ -71,6 +66,7 @@ for line in input_file:
             rs = format(1, "01b")  #rs = $2
         else:
             print("Error at lw: register source")
+            output_file.write("Error lw Reg source\n")
             continue;
         p = parity(op+rt+rs)
         print(op + " " + rt + " " + rs + "\n")
@@ -91,13 +87,15 @@ for line in input_file:
         elif(line[0] == '2'):
             rt = format(1, "01b")  #rt = $2
         else:
-            print("Error at sw");
+            print("Error sw destination");
+            output_file.write("Error sw Reg dest\n")
             continue;
 
         if(int(line[1]) >= 0 and int(line[1]) < 8):   #imm[0-8]
             imm = format(int(line[1]), "03b")
         else:
             print("Error at sw")
+            output_file.write("Error sw imm\n")
             continue;
         p = parity(op+rt+imm)
         print(op + " " + rt + " " + imm + "\n")
@@ -119,11 +117,13 @@ for line in input_file:
             rt = format(int(line[0])-1, "02b")
         else:
             print("Error at init")
+            output_file.write("Error init Reg dest\n")
             continue;
         if(int(line[1]) >= 0 and int(line[1]) < 4):   #imm[0-8]
             imm = format(int(line[1]), "02b")
         else:
             print("Error at init")
+            output_file.write("Error init imm\n")
             continue;
         p = parity(op+rt+imm)
         print(op + " " + rt + " " + imm + "\n")
@@ -144,6 +144,7 @@ for line in input_file:
             rt = format(int(line[0])-1, "02b")
         else:
             print("Error at shiftL")
+            output_file.write("Error shiftL reg\n")
             continue;
         p = parity(op+rt)
         print(op + " " + rt + " " + "\n")
@@ -163,6 +164,7 @@ for line in input_file:
             rt = format(int(line[0])-1, "02b")
         else:
             print("Error at shiftR")
+            output_file.write("Error shiftR reg\n")
             continue;
         p = parity(op+rt)
         print(op + " " + rt + " " + "\n")
@@ -182,6 +184,7 @@ for line in input_file:
             rt = format(int(line[0])-1, "02b")
         else:
             print("Error at sub")
+            output_file.write("Error sub dest reg\n")
             continue;
 
         if(line[1] == '1'):
@@ -190,6 +193,7 @@ for line in input_file:
             rs = format(1, "01b")
         else:
             print("Error at sub")
+            output_file.write("Error sub source Reg\n")
             continue;
         p = parity(op+rt+rs)
         print(op + " " + rt + " "+ rs + " " + "\n")
@@ -208,6 +212,7 @@ for line in input_file:
             rt = format(int(line[0])-1, "02b")
         else:
             print("Error at addi: unknown register")
+            output_file.write("Error addi source Reg\n")
 
         if(line[1] == '-2'):
             imm = '10'
@@ -219,6 +224,7 @@ for line in input_file:
             imm = '01'
         else:
             print("Error at addi: invalid imm")
+            output_file.write("Error addi imm\n")
             
         p = parity(op+rt+imm)
         print(op + " " + rt + " "+ imm + " " + "\n")
@@ -233,19 +239,23 @@ for line in input_file:
         line = line.replace("add","")
         line = line.split(',')
         count = count + 1
-        if(line[0] > '0' and line[0] < '5'):
-            rt = format(int(line[0])-1, "02b")
+        
+        if(line[0] == '1'):
+            rt = format(0, "01b")
+        elif (line[0] == '2'):
+            rt = format(1, "01b")
         else:
             print("Error at add")
+            output_file.write("Error add Reg source\n")
             continue;
-
-        if(line[1] == '1'):
-            rs = format(0, "01b")
-        elif (line[1] == '3'):
-            rs = format(1, "01b")
+        
+        if(line[1] > '0' and line[1] < '5'):
+            rs = format(int(line[1])-1, "02b")
         else:
             print("Error at add")
+            output_file.write("Error add Reg dest\n")
             continue;
+        
         p = parity(op+rt+rs)
         print(op + " " + rt + " "+ rs + " " + "\n")
         output_file.write(p + op + rt + rs + "\n")
@@ -268,6 +278,7 @@ for line in input_file:
                 continue;
         if (imm == -1):
             print("Error at j")
+            output_file.write("Error jump cant be found\n")
 
     elif(line[0:5] == 'bgtR1'):
         op = "0001"
@@ -282,7 +293,8 @@ for line in input_file:
         elif(line[0] == '3'):
             rt = format(1, "01b")     #rt = $4
         else:
-            print("Error at bgtR1");
+            print("Error at bgtR1 Register");
+            output_file.write("Error bgtR1 Reg\n")
             continue;
         imm = -1
         for m in range(0, len(jmpList)):
@@ -296,9 +308,11 @@ for line in input_file:
                     output_file.write(p + op + rt + imm + "\n")
                 else:
                     print("Error at bgtR1 you can only jump forward by imm of 4")
+                    output_file.write("Error bgtR1 jump only 4\n")
                 continue
         if (imm == -1):
             print("Error at bgtR1: incorrect branch coordinate")
+            output_file.write("Error bgtR1 unexpected\n")
             count = count + 1
 
     #bltR1 $2($4) imm[1-4]
@@ -316,6 +330,7 @@ for line in input_file:
             rt = format(1, "01b")  #rt = $4
         else:
             print("Error at bltR1: incorrect register");
+            output_file.write("Error bltR1 Reg\n")
             continue;
         imm = -1
         for m in range(0, len(jmpList)):
@@ -329,10 +344,12 @@ for line in input_file:
                      output_file.write(p + op + rt + imm + "\n")
                  else:
                      print("Error at bltR1 you can only jump forward by imm of 4")
+                     output_file.write("Error bltR1 can't go backward\n")
                  continue
 
         if (imm == -1):
             print("Error at bgtR1: incorrect branch coordinate")
+            output_file.write("Error bgtR1 unexpected\n")
             count = count + 1
     elif(line[0:4] == 'halt'):
         op = '0000000'
