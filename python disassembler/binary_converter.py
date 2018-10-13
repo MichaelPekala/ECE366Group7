@@ -1,4 +1,5 @@
-print("ECE366 Fall 2018 mini ISA assembler, supporting: lw, sw, init, shiftL, shiftR, bgtR1, bltR1, sub, add, j, increment, decrement")
+print("ECE366 Fall 2018 mini ISA assembler, supporting: lw, sw, init, shiftL, shiftR, ")
+print("bgtR1, bltR1, sub, add, j, increment, decrement")
 print("--------")
 
 input_file = open("ISA_asm.txt", "r")
