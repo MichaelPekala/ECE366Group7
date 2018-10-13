@@ -52,6 +52,8 @@ for line in input_file:
     if(line[0:2] == 'lw'):                # addi:
         line = line.replace("$","")         # remove $'s anywhere
         line = line.replace("lw","")      # "addi $23, $25, 100" will be split
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.split(',')              # into three strings: "23" "25" "100"
         count = count + 1
         op = "00001"
@@ -79,6 +81,8 @@ for line in input_file:
     elif(line[0:2] == 'sw'):                # addi:
         line = line.replace("$","")         # remove $'s anywhere
         line = line.replace("sw","")      # "addi $23, $25, 100" will be split
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.split(',')              # into three strings: "23" "25" "100"
         count = count + 1
         op = "001"
@@ -106,6 +110,8 @@ for line in input_file:
         op = "011"
         count = count + 1
         line = line.replace("$","")         # remove $'s anywhere
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("init","")
         line = line.split(',')
 
@@ -129,7 +135,10 @@ for line in input_file:
         op = "01010"
         count = count + 1
         line = line.replace("$","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("shiftL","")
+        line = line.split(',')
 
         if(line[0] > '0' and line[0] < '5'):
             rt = format(int(line[0])-1, "02b")
@@ -145,7 +154,10 @@ for line in input_file:
     elif(line[0:6] == 'shiftR'):
         op = "01011"
         line = line.replace("$","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("shiftR","")
+        line = line.split(',')
         count = count + 1
         if(line[0] > '0' and line[0] < '5'):
             rt = format(int(line[0])-1, "02b")
@@ -161,6 +173,8 @@ for line in input_file:
     elif(line[0:3] == 'sub'):
         op = "0100"
         line = line.replace("$","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("sub","")
         line = line.split(',')
         count = count + 1
@@ -185,6 +199,8 @@ for line in input_file:
     elif(line[0:4] == 'addi'):
         op = "101"
         line = line.replace("$","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("addi","")
         line = line.split(',')
         count = count + 1
@@ -212,6 +228,8 @@ for line in input_file:
     elif(line[0:3] == 'add'):
         op = "1000"
         line = line.replace("$","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("add","")
         line = line.split(',')
         count = count + 1
@@ -236,6 +254,8 @@ for line in input_file:
     elif(line[0:1] == 'j'):
         op = "11"
         line = line.replace("j","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.split(',')
         count = count + 1
         imm = -1
@@ -253,6 +273,8 @@ for line in input_file:
         op = "0001"
         line = line.replace("$","")
         line = line.replace("bgtR1","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.split(',')
 
         if(line[0] == '2'):           #rt = $2
@@ -283,6 +305,8 @@ for line in input_file:
     elif(line[0:5] == 'bltR1'):
         op = "1001"
         line = line.replace("$","")
+        line = line.replace("(", ",")
+        line = line.replace("#", ",")
         line = line.replace("bltR1","")
         line = line.split(',')
 
