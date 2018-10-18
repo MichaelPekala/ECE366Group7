@@ -40,7 +40,8 @@ for line in input_file:
    #lw rt, rs
     for i in range(0, len(jmpNum)):
         if count == jmpNum[i]:
-            line = line.replace(jmpList[i], "")
+            x=len(jmpList[i])
+            line = line.replace(line[0:x], '', 1) 
             line = line.replace(":", "")
     print("Instr: ", line)          # show the asm instruction to screen
     
