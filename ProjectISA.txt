@@ -3,7 +3,7 @@
 
 	lw	       00001 x  y		Loads into $0 or $1 from the address at $0 or $2
 	sw        	 001 x  iii  		Stores $0 or $1 into memory at M[0:7]
-	init  	         011 xx ii		Initializes any register to an imm value imm[-2:1]
+	init  	         011 xx ii		Initializes any register to an unsigned imm value imm[0:3]
 	shiftL	       01010 xx			$xx << 1
 	shiftR	       01011 xx			$xx >> 1
 	bgtR0	        0001 x  ii    	 	Branches if $1 or $2 is greater than $0 by unsigned imm [1:4]
