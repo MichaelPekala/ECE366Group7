@@ -20,7 +20,7 @@ notEqual:			init $0, 2		(1)0110010		$0 = 2
 				j newWord		(0)1101001		If all words have not been checked, jumps to next word
 noMoreWords:			init $0, 0		(0)0110000		Sets $0 to 0
 				init $1, 0		(1)0110100		Sets $1 to 0
-				add $1, $2		(1)1000110		$3 = $2 (Best_matching_count)
+				add $1, $2		(1)1000011		$3 = $2 (Best_matching_count)
 				sw $1, 5		(1)0011101		Stores $1 (Best_matching_count) into M[5]
 				bgtR0 $1, exactFound	(0)0001010		If $2 > 0, a best match was found and 16 should be stored in M[4]
 				sw $0, 4		(0)0010100		Incase a best isnt found, stores 0 into M[4]
