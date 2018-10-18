@@ -30,4 +30,4 @@ exactFound:			init $1, 2		(1)0110010		$1 = 2
 				shiftL $1		(0)0101000		$1 = 8
 				shiftL $1		(0)0101000		$1 = 16
 				sw $1, 4		(0)0010100		Stores 16 into M[4]
-done:				halt			(0)0000000		Pause
+done:				j done			(1)1111111		Stops the PC
