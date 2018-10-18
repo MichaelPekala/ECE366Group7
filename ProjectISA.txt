@@ -9,6 +9,6 @@
 	bgtR1	        0001 x  ii    	 	Branches if $1 or $2 is greater than $0 by unsigned imm [1:4]
 	bltR1	        1001 x  ii		Branches if $1 or $2 is less than $0 by unsigned imm [1:4]
 	sub             0100 xx y 		$xx = $xx - $y		x:[0:3] y:[0 or 2]
-	add		1000 x yy		$x = $x + $yy		x:[0:1] y:[0:3]
+	add		1000 xx y		$xx = $xx + $y		x:[0:3] y:[0 or 2]
 	j		  11 iiiii		Jumps to PC = imm[0:31]
 	addi		 101 xx ii		$xx = $xx + ii x:[1:4] imm [-2,1]
